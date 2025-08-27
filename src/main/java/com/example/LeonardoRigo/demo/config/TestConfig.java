@@ -8,9 +8,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.example.LeonardoRigo.demo.entities.Category;
 import com.example.LeonardoRigo.demo.entities.Order;
 import com.example.LeonardoRigo.demo.entities.User;
 import com.example.LeonardoRigo.demo.entities.enums.OrderStatus;
+import com.example.LeonardoRigo.demo.repositories.CategoryRepository;
 import com.example.LeonardoRigo.demo.repositories.OrderRepository;
 import com.example.LeonardoRigo.demo.repositories.UserRepository;
 
@@ -23,6 +25,9 @@ public class TestConfig implements CommandLineRunner{
 	
 	@Autowired
 	private OrderRepository	orderRepository;
+	
+	@Autowired
+	private CategoryRepository categoryRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -34,8 +39,13 @@ public class TestConfig implements CommandLineRunner{
 		Order o2 = new Order(null, Instant.parse("2016-03-10T12:39:33.07Z"),OrderStatus.SHIPPED,u2);
 		Order o3 = new Order(null, Instant.parse("2013-07-08T11:36:22.22Z"),OrderStatus.WAITING_PAYMENT,u1);
 		
+		Category c1 = new Category(null,"Eletronics");
+		Category c2 = new Category(null,"Books");
+		Category c3 = new Category(null,"Computers");
+		
+		
 		userRepository.saveAll(Arrays.asList(u1, u2));
 		orderRepository.saveAll(Arrays.asList(o1,o2,o3));
+		categoryRepository.saveAll(Arrays.asList(c1,c2,c3));
 	}
-
 }
